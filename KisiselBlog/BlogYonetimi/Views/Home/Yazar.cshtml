@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BlogYonetimi.Models.Yazar>
+
+@{
+    ViewData["Title"] = "Yazar";
+}
+<body style="background-color: gray;">
+    <button type="button" onclick="$('#YazarModal').modal('show')" class="btn btn-primary" data-toggle="modal">Yazar Ekle</button>
+    <table class="table table-hover">
+        <thead>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Surame</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col"></th>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.id</th>
+                    <td>@item.Name</td>
+                    <td>@item.Surname</td>
+                    <td>@item.Email</td>
+                    <td>@item.Password</td>
+
+                    <td><a class="btn btn-danger" asp-route-id="@item.id" asp-action="DeleteYazar">Sil</a></td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+
+    <div class="modal" id="YazarModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="/Home/AddYazar">
+                    <div class="modal-body">
+                        <div class="form-body">
+                            <input type="hidden" name="id" class="form-control" />
+                            <input type="text" name="Name" class="form-control" />
+                            <input type="text" name="Surname" class="form-control" />
+                            <input type="text" name="Email" class="form-control" />
+                            <input type="text" name="Password" class="form-control" />
+
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>
